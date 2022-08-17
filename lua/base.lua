@@ -1,32 +1,26 @@
--- Show relative line numbers.
-vim.opt.number = true
-vim.opt.relativenumber = true
+vim.opt.number = true -- Show line numbers.
+vim.opt.relativenumber = true -- Show relative line numbers.
 
--- Disable error bells.
-vim.opt.errorbells = false
+vim.opt.errorbells = false -- Disable error bells.
 
--- Tab width.
+-- Set tab width to 2.
 vim.opt.tabstop = 2
 vim.opt.softtabstop = 2
 vim.opt.shiftwidth = 2
 vim.opt.expandtab = true
 
-vim.opt.wrap = false
+vim.opt.wrap = false -- Don't wrap lines.
 
-vim.opt.hlsearch = false
-vim.opt.incsearch = true
+vim.opt.hlsearch = false -- Don't highlight all search matches.
+vim.opt.incsearch = true -- Incrementally hightlight search results.
+vim.opt.ignorecase = true -- Ignore case when searching.
 
--- Scroll offset of 10
-vim.opt.scrolloff = 10
+vim.opt.scrolloff = 10 -- Offset bottom of screen by 10 lines.
 
-vim.opt.termguicolors = true
+vim.opt.termguicolors = true -- Enable 24-bit colors in terminal ui.
 
--- Increase space for displaying messages.
-vim.opt.cmdheight = 1
+vim.opt.cmdheight = 1 -- Allocate 1 screen line to the command line.
 
--- Decrease update time for improved performance.
-vim.opt.updatetime = 50
+vim.opt.colorcolumn = "80" -- Ruler at 80 char mark.
 
-vim.opt.colorcolumn = "80"
-
-vim.g.mapleader = " "
+vim.g.mapleader = " " -- Remap leader to space.
