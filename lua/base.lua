@@ -23,4 +23,4 @@ vim.opt.cmdheight = 1 -- Allocate 1 screen line to the command line.
 
 vim.opt.colorcolumn = "80" -- Ruler at 80 char mark.
 
-vim.g.mapleader = " " -- Remap leader to space.
+-- vim.g.mapleader = " " -- Remap leader to space.

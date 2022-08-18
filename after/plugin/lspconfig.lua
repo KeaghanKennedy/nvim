@@ -1,7 +1,9 @@
-local on_attatch = function(client, bufnr)
-  local bufopts = {noremap=true, silent=true, buffer=bufnr }
-
-  vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, bufopts)
+-- Use an on_attach function to only map the following keys
+-- after the language server attaches to the current buffer
+local on_attach = function(client, bufnr)
+  -- Mappings.
+  -- See `:help vim.lsp.*` for documentation on any of the below functions
+  local bufopts = { noremap=true, silent=true, buffer=bufnr }
   vim.keymap.set('n', 'gd', vim.lsp.buf.definition, bufopts)
 end
 
