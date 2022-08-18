@@ -9,4 +9,8 @@ return require('packer').startup(function(use)
   use 'folke/tokyonight.nvim' -- Tokyo night color scheme.
   use 'neovim/nvim-lspconfig' -- LSP.
   use "lukas-reineke/lsp-format.nvim" -- Async format on write.
+  use { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' }
+  use "windwp/nvim-ts-autotag"
+  use "windwp/nvim-autopairs"
+  use 'nvim-lua/plenary.nvim' -- Common utilities
 end)
