@@ -1,5 +1,6 @@
-function foo() {
-  return 42;
+function foo(bar: number) {
+  return bar * bar
 }
 
-foo()
+foo(3)
+

@@ -69,6 +69,11 @@ end
 time([[try_loadstring definition]], false)
 time([[Defining packer_plugins]], true)
 _G.packer_plugins = {
+  ["lsp-format.nvim"] = {
+    loaded = true,
+    path = "/home/keaghan/.local/share/nvim/site/pack/packer/start/lsp-format.nvim",
+    url = "https://github.com/lukas-reineke/lsp-format.nvim"
+  },
   ["nvim-lspconfig"] = {
     loaded = true,
     path = "/home/keaghan/.local/share/nvim/site/pack/packer/start/nvim-lspconfig",

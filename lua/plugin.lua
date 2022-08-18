@@ -8,4 +8,5 @@ return require('packer').startup(function(use)
   use 'wbthomason/packer.nvim'
   use 'folke/tokyonight.nvim' -- Tokyo night color scheme.
   use 'neovim/nvim-lspconfig' -- LSP.
+  use "lukas-reineke/lsp-format.nvim" -- Async format on write.
 end)
