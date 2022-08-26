@@ -46,6 +46,19 @@ return packer.startup(function(use)
   -- Colorschemes
   use 'https://github.com/sainnhe/edge' -- Edge color scheme
 
+  -- Completion
+  use 'hrsh7th/nvim-cmp'                -- Completion plugin
+  use 'hrsh7th/cmp-nvim-lsp'            -- 
+  use 'hrsh7th/cmp-buffer'              -- Buffer completions
+  use 'hrsh7th/cmp-path'                -- Path completions
+  use 'hrsh7th/cmp-cmdline'             -- Command line completions
+  use 'saadparwaiz1/cmp_luasnip'        -- Luasnip completions
+
+  -- Snippets
+  use 'L3MON4D3/LuaSnip'                -- Snippet engine
+  use 'rafamadriz/friendly-snippets'    -- Snippet collection
+  use 'onsails/lspkind.nvim'            -- VSCode like pictograms
+
   if PACKER_BOOTSTRAP then
     require("packer").sync()
   end
