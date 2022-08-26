@@ -29,14 +29,22 @@ packer.init {
 
 
 return packer.startup(function(use)
-  use 'wbthomason/packer.nvim'  -- Let packer manage itself
-  use 'folke/tokyonight.nvim' -- Tokyo night color scheme
-  use 'neovim/nvim-lspconfig' -- LSP
-  use "lukas-reineke/lsp-format.nvim" -- Async format on write
+  use 'wbthomason/packer.nvim'          -- Let packer manage itself
+  use 'nvim-lua/popup.nvim'             -- Lua implementation of popup api
+  use 'nvim-lua/plenary.nvim'           -- Common utilities
+
+  -- LSP
+  use 'neovim/nvim-lspconfig'          
+  use "lukas-reineke/lsp-format.nvim"   -- Async format on write
+  
+  -- Treesitter
   use { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' }
-  use "windwp/nvim-ts-autotag"
-  use "windwp/nvim-autopairs"
-  use 'nvim-lua/plenary.nvim' -- Common utilities
+
+  use "windwp/nvim-ts-autotag"          -- Auto close jsx tags
+  use "windwp/nvim-autopairs"           -- Auto close brackets and quotes
+
+  -- Colorschemes
+  use 'https://github.com/sainnhe/edge' -- Edge color scheme
 
   if PACKER_BOOTSTRAP then
     require("packer").sync()

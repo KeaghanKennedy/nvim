@@ -69,6 +69,11 @@ end
 time([[try_loadstring definition]], false)
 time([[Defining packer_plugins]], true)
 _G.packer_plugins = {
+  edge = {
+    loaded = true,
+    path = "/home/keaghan/.local/share/nvim/site/pack/packer/start/edge",
+    url = "https://github.com/sainnhe/edge"
+  },
   ["lsp-format.nvim"] = {
     loaded = true,
     path = "/home/keaghan/.local/share/nvim/site/pack/packer/start/lsp-format.nvim",
@@ -104,10 +109,10 @@ _G.packer_plugins = {
     path = "/home/keaghan/.local/share/nvim/site/pack/packer/start/plenary.nvim",
     url = "https://github.com/nvim-lua/plenary.nvim"
   },
-  ["tokyonight.nvim"] = {
+  ["popup.nvim"] = {
     loaded = true,
-    path = "/home/keaghan/.local/share/nvim/site/pack/packer/start/tokyonight.nvim",
-    url = "https://github.com/folke/tokyonight.nvim"
+    path = "/home/keaghan/.local/share/nvim/site/pack/packer/start/popup.nvim",
+    url = "https://github.com/nvim-lua/popup.nvim"
   }
 }
 
