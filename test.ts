@@ -3,4 +3,3 @@ function foo(bar: number) {
 }
 
 foo(3)
-

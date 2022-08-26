@@ -104,11 +104,6 @@ _G.packer_plugins = {
     path = "/home/keaghan/.local/share/nvim/site/pack/packer/start/plenary.nvim",
     url = "https://github.com/nvim-lua/plenary.nvim"
   },
-  ["telescope.nvim"] = {
-    loaded = true,
-    path = "/home/keaghan/.local/share/nvim/site/pack/packer/start/telescope.nvim",
-    url = "https://github.com/nvim-telescope/telescope.nvim"
-  },
   ["tokyonight.nvim"] = {
     loaded = true,
     path = "/home/keaghan/.local/share/nvim/site/pack/packer/start/tokyonight.nvim",
