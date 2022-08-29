@@ -1,5 +1,5 @@
-function foo(bar: number) {
-  return bar * bar
+function bar(foo: number) {
+  return foo * foo
 }
 
-foo(3)
+bar(3)

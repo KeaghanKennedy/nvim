@@ -1,4 +1,3 @@
--- This file can be loaded by calling `lua require('plugins')` from your init.vim
 local fn = vim.fn
 
 -- Automatically install packer
@@ -34,17 +33,15 @@ return packer.startup(function(use)
   use 'nvim-lua/plenary.nvim'           -- Common utilities
 
   -- LSP
+  use 'williamboman/mason.nvim'
+  use 'williamboman/mason-lspconfig.nvim'
   use 'neovim/nvim-lspconfig'          
-  use "lukas-reineke/lsp-format.nvim"   -- Async format on write
   
   -- Treesitter
   use { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' }
 
   use "windwp/nvim-ts-autotag"          -- Auto close jsx tags
   use "windwp/nvim-autopairs"           -- Auto close brackets and quotes
-
-  -- Colorschemes
-  use 'https://github.com/sainnhe/edge' -- Edge color scheme
 
   -- Completion
   use 'hrsh7th/nvim-cmp'                -- Completion plugin
@@ -57,7 +54,12 @@ return packer.startup(function(use)
   -- Snippets
   use 'L3MON4D3/LuaSnip'                -- Snippet engine
   use 'rafamadriz/friendly-snippets'    -- Snippet collection
-  use 'onsails/lspkind.nvim'            -- VSCode like pictograms
+
+  -- Telescope
+  use { 'nvim-telescope/telescope.nvim', tag = '0.1.0', }
+
+  -- Colorschemes
+  use 'https://github.com/sainnhe/edge' -- Edge color scheme
 
   if PACKER_BOOTSTRAP then
     require("packer").sync()
