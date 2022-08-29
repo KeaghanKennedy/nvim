@@ -59,7 +59,7 @@ return packer.startup(function(use)
   use { 'nvim-telescope/telescope.nvim', tag = '0.1.0', }
 
   -- Colorschemes
-  use 'https://github.com/sainnhe/edge' -- Edge color scheme
+  use 'sainnhe/edge' -- Edge color scheme
 
   if PACKER_BOOTSTRAP then
     require("packer").sync()
