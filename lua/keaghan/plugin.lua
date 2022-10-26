@@ -35,8 +35,8 @@ return packer.startup(function(use)
   -- LSP
   use 'williamboman/mason.nvim'
   use 'williamboman/mason-lspconfig.nvim'
-  use 'neovim/nvim-lspconfig'          
-  
+  use 'neovim/nvim-lspconfig'
+
   -- Treesitter
   use { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' }
 
@@ -45,21 +45,26 @@ return packer.startup(function(use)
 
   -- Completion
   use 'hrsh7th/nvim-cmp'                -- Completion plugin
-  use 'hrsh7th/cmp-nvim-lsp'            -- 
+  use 'hrsh7th/cmp-nvim-lsp'
   use 'hrsh7th/cmp-buffer'              -- Buffer completions
   use 'hrsh7th/cmp-path'                -- Path completions
   use 'hrsh7th/cmp-cmdline'             -- Command line completions
   use 'saadparwaiz1/cmp_luasnip'        -- Luasnip completions
 
+  -- LSP UI
+  use 'glepnir/lspsaga.nvim'            -- Prettier lsp windows
+  use 'onsails/lspkind.nvim'            -- VSCode like pictograms
+
   -- Snippets
   use 'L3MON4D3/LuaSnip'                -- Snippet engine
-  use 'rafamadriz/friendly-snippets'    -- Snippet collection
 
   -- Telescope
   use { 'nvim-telescope/telescope.nvim', tag = '0.1.0', }
 
   -- Colorschemes
-  use 'sainnhe/edge' -- Edge color scheme
+  -- use 'sainnhe/edge' 
+  use 'folke/tokyonight.nvim'
+  use 'overcache/NeoSolarized'
 
   if PACKER_BOOTSTRAP then
     require("packer").sync()
