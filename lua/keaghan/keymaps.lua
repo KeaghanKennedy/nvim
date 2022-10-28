@@ -1,56 +1,32 @@
-local opts = { noremap = true, silent = true }
-local term_opts = { silent = true }
-
-local keymap = vim.api.nvim_set_keymap
-
--- Remap leader to space
-keymap("", "<Space>", "<Nop>", opts)
+-- remap leader to space
 vim.g.mapleader = " "
-vim.g.maplocalleader = " "
 
+local keymap = vim.keymap
+
+------------
 -- Normal --
--- Better window navigation
-keymap("n", "<C-j>", "<C-w>j", opts)
-keymap("n", "<C-k>", "<C-w>k", opts)
-keymap("n", "<C-h>", "<C-w>h", opts)
-keymap("n", "<C-l>", "<C-w>l", opts)
+------------
 
--- User <leader>e to toggle left explore
-keymap("n", "<leader>e", ":Lexplore 25<CR>", opts)
+-- split windows
+keymap.set("n", "<leader>sv", "<C-w>v") -- split window vertically
+keymap.set("n", "<leader>sh", "<C-w>s") -- split window horizontally
+keymap.set("n", "<leader>se", "<C-w>=") -- balance open split
+keymap.set("n", "<leader>sx", ":close<CR>") -- close current windows
 
--- Resize with arrows
-keymap("n", "<C-Up>", ":resize +2<CR>", opts)
-keymap("n", "<C-Down>", ":resize -2<CR>", opts)
-keymap("n", "<C-Left>", ":vertical resize +2<CR>", opts)
-keymap("n", "<C-Right>", ":vertical resize -2<CR>", opts)
+-- tab management
+keymap.set("n", "<leader>to", ":tabnew<CR>") -- open new tab
+keymap.set("n", "<leader>tx", ":tabclose<CR>") -- close current tab
+keymap.set("n", "<leader>tl", ":tabn<CR>") --  go to next tab
+keymap.set("n", "<leader>th", ":tabp<CR>") --  go to previous tab
 
--- Navigate buffers
-keymap("n", "<S-l>", ":bnext<CR>", opts)
-keymap("n", "<S-h>", ":bprevious<CR>", opts)
+-- resize with arrows
+keymap.set("n", "<C-Up>", ":resize +2<CR>")
+keymap.set("n", "<C-Down>", ":resize -2<CR>")
+keymap.set("n", "<C-Left>", ":vertical resize +2<CR>")
+keymap.set("n", "<C-Right>", ":vertical resize -2<CR>")
 
--- Move line up and down
-keymap("n", "<A-k>", ":move .-2<CR>==", opts)
-keymap("n", "<A-j>", ":move .+1<CR>==", opts)
-
+------------
 -- Visual --
--- Stay in indent mode (we need this for the visual maps that move text)
-keymap("v", "<", "<gv", opts)
-keymap("v", ">", ">gv", opts)
-
--- Move text up and down
-keymap("x", "<A-k>", ":move '<-2<CR>gv-gv", opts)
-keymap("x", "<A-j>", ":move '>+1<CR>gv-gv", opts)
-
--- Make yanked text persist in between pastes
-keymap("v", "p", "'_dP", opts)
-
--- Terminal --
--- Better terminal navigation
-keymap("t", "<C-k>", "<C-\\><C-N><C-w>k", term_opts)
-keymap("t", "<C-j>", "<C-\\><C-N><C-w>j", term_opts)
-keymap("t", "<C-h>", "<C-\\><C-N><C-w>h", term_opts)
-keymap("t", "<C-l>", "<C-\\><C-N><C-w>l", term_opts)
-
-keymap("n", "<leader>ff", "<cmd>lua require('telescope.builtin').find_files(require('telescope.themes').get_dropdown({}))<cr>", opts)
-keymap("n", "<leader>fg", "<cmd>lua require('telescope.builtin').live_grep(require('telescope.themes').get_dropdown({}))<cr>", opts)
-keymap("n", "<leader>fb", "<cmd>lua require('telescope.builtin').buffers(require('telescope.themes').get_dropdown({}))<cr>", opts)
+------------
+-- make yanked text persist in between pastes
+keymap.set("v", "p", "'_dP")

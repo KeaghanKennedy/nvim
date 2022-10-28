@@ -1,72 +1,78 @@
-local fn = vim.fn
-
--- Automatically install packer
-local install_path = fn.stdpath "data" .. "/site/pack/packer/start/packer.nvim"
-if fn.empty(fn.glob(install_path)) > 0 then
-  PACKER_BOOTSTRAP = fn.system {
-    "git",
-    "clone",
-    "--depth",
-    "1",
-    "https://github.com/wbthomason/packer.nvim",
-    install_path
-  }
-  print "Installing packer. Close and reopen Neovim..."
-  vim.cmd [[packadd packer.nvim ]]
+local status_ok, packer = pcall(require, "packer")
+if not status_ok then
+	print("packer not installed")
+	return
 end
 
-local packer = require("packer")
-
--- Show packer in a popup window
-packer.init {
-  display = {
-    open_fn = function()
-      return require("packer.util").float { border = "rounded" }
-    end,
-  },
-}
-
+packer.init({
+	display = {
+		open_fn = function()
+			return require("packer.util").float({ border = "single" })
+		end,
+	},
+})
 
 return packer.startup(function(use)
-  use 'wbthomason/packer.nvim'          -- Let packer manage itself
-  use 'nvim-lua/popup.nvim'             -- Lua implementation of popup api
-  use 'nvim-lua/plenary.nvim'           -- Common utilities
+	use("wbthomason/packer.nvim") -- let packer manage itself
+	use("nvim-lua/popup.nvim") -- lua implementation of popup api
+	use("nvim-lua/plenary.nvim") -- common utilities
 
-  -- LSP
-  use 'williamboman/mason.nvim'
-  use 'williamboman/mason-lspconfig.nvim'
-  use 'neovim/nvim-lspconfig'
+	-- general
+	use("tpope/vim-surround") -- add, delete, change surroundings (it's awesome)
+	use("vim-scripts/ReplaceWithRegister") -- replace with register contents using motion (gr + motion)
 
-  -- Treesitter
-  use { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' }
+	-- colorschemes
+	use("folke/tokyonight.nvim")
 
-  use "windwp/nvim-ts-autotag"          -- Auto close jsx tags
-  use "windwp/nvim-autopairs"           -- Auto close brackets and quotes
+	-- window management
+	use("christoomey/vim-tmux-navigator") -- tmux & split window navigation
+	use("szw/vim-maximizer") -- maximizes and restore current window
 
-  -- Completion
-  use 'hrsh7th/nvim-cmp'                -- Completion plugin
-  use 'hrsh7th/cmp-nvim-lsp'
-  use 'hrsh7th/cmp-buffer'              -- Buffer completions
-  use 'hrsh7th/cmp-path'                -- Path completions
-  use 'hrsh7th/cmp-cmdline'             -- Command line completions
-  use 'saadparwaiz1/cmp_luasnip'        -- Luasnip completions
+	-- statusline
+	use("nvim-lualine/lualine.nvim")
 
-  -- LSP UI
-  use 'glepnir/lspsaga.nvim'            -- Prettier lsp windows
-  use 'onsails/lspkind.nvim'            -- VSCode like pictograms
+	-- file explorer
+	use("nvim-tree/nvim-tree.lua")
+	use("nvim-tree/nvim-web-devicons") -- vscode like icons
 
-  -- Snippets
-  use 'L3MON4D3/LuaSnip'                -- Snippet engine
+	-- telescope
+	use({ "nvim-telescope/telescope.nvim", tag = "0.1.0" })
+	use({ "nvim-telescope/telescope-fzf-native.nvim", run = "make" }) -- faster sorting
 
-  -- Telescope
-  use { 'nvim-telescope/telescope.nvim', tag = '0.1.0', }
+	-- lsp
+	use("neovim/nvim-lspconfig") -- lsp configuration layer
+	use({ "glepnir/lspsaga.nvim", branch = "main" }) -- lsp ui plugin
+	use("williamboman/mason.nvim") -- installer for language servers/formatters
+	use("williamboman/mason-lspconfig.nvim")
+	use("jose-elias-alvarez/typescript.nvim") -- pimped out tsserver
 
-  -- Colorschemes
-  -- use 'sainnhe/edge' 
-  use 'folke/tokyonight.nvim'
-  use 'overcache/NeoSolarized'
+	-- formatting/linting
+	use("jose-elias-alvarez/null-ls.nvim") -- configure formatters & linters
+	use("jayp0521/mason-null-ls.nvim") -- null-ls mason integration
 
-  if PACKER_BOOTSTRAP then
-    require("packer").sync()
-  end
+	-- treesitter
+	use({ "nvim-treesitter/nvim-treesitter", run = ":TSUpdate" })
+
+	-- comments
+	use("numToStr/Comment.nvim") -- comments
+	use("JoosepAlviste/nvim-ts-context-commentstring") -- context based comments (for jsx/tsx)
+
+	-- auto closing
+	use("windwp/nvim-ts-autotag") -- auto close jsx tags
+	use("windwp/nvim-autopairs") -- auto close brackets and quotes
+
+	-- completion
+	use("hrsh7th/nvim-cmp") -- completion engine
+	use("hrsh7th/cmp-nvim-lsp") -- lsp completion source
+	use("hrsh7th/cmp-buffer") -- buffer completion source
+	use("saadparwaiz1/cmp_luasnip") -- luasnip completion source
+	use("onsails/lspkind.nvim") -- vscode like pictograms
+
+	-- snippets
+	use("L3MON4D3/LuaSnip") -- snippet engine
+	use("rafamadriz/friendly-snippets") -- collection of useful snippets
+
+	-- git
+	use("lewis6991/gitsigns.nvim") -- git markers
+	use("dinhhuy258/git.nvim") -- lua port of vim fugitive
 end)

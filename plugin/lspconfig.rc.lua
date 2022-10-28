@@ -1,69 +1,66 @@
-local status_ok, nvim_lsp = pcall(require, 'lspconfig')
-if not status_ok then
-  return
+local lspconfig_status_ok, lspconfig = pcall(require, "lspconfig")
+if not lspconfig_status_ok then
+	print("lspconfig not installed")
+	return
 end
 
-local protocol = require('vim.lsp.protocol')
-
--- Use an on_attach function to only map the following keys
--- after the language server attaches to the current buffer
-local on_attach = function(_, bufnr)
-  -- Enable completion triggered by <c-x><c-o>
-  -- vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
-
-  -- Mappings.
-  local bufopts = { noremap=true, silent=true, buffer=bufnr }
-  vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, bufopts)
-  vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, bufopts)
+local cmp_nvim_lsp_status_ok, cmp_nvim_lsp = pcall(require, "cmp_nvim_lsp")
+if not cmp_nvim_lsp_status_ok then
+	print("cmp_nvim_lsp not installed")
+	return
 end
 
--- Require mason and mason-lspconfig BEFORE any lspconfig
-require('mason').setup()
-require('mason-lspconfig').setup()
+local typescript_status_ok, typescript = pcall(require, "typescript")
+if not typescript_status_ok then
+	print("typescript.nvim not installed")
+	return
+end
 
-protocol.CompletionItemKind = {
-  '', -- Text
-  '', -- Method
-  '', -- Function
-  '', -- Constructor
-  '', -- Field
-  '', -- Variable
-  '', -- Class
-  'ﰮ', -- Interface
-  '', -- Module
-  '', -- Property
-  '', -- Unit
-  '', -- Value
-  '', -- Enum
-  '', -- Keyword
-  '﬌', -- Snippet
-  '', -- Color
-  '', -- File
-  '', -- Reference
-  '', -- Folder
-  '', -- EnumMember
-  '', -- Constant
-  '', -- Struct
-  '', -- Event
-  'ﬦ', -- Operator
-  '', -- TypeParameter
-}
+local keymap = vim.keymap
 
-local capabilties = require('cmp_nvim_lsp').default_capabilities()
+-- used to attatch keybinds after server becomes available
+local on_attach = function(client, bufnr)
+	local opts = { noremap = true, silent = true, buffer = bufnr }
+	-- keep default jump to definition
+	keymap.set("n", "gd", vim.lsp.buf.definition, opts)
 
-require('lspconfig')['tsserver'].setup{
-    on_attach = on_attach,
-    capabilties=capabilties
-}
+	-- typescript specific keymaps (e.g. rename file and update imports)
+	-- if client.name == "tsserver" then
+	-- 	keymap.set("n", "<leader>rf", ":TypescriptRenameFile<CR>") -- rename file and update imports
+	-- 	keymap.set("n", "<leader>oi", ":TypescriptOrganizeImports<CR>") -- organize imports (not in youtube nvim video)
+	-- 	keymap.set("n", "<leader>ru", ":TypescriptRemoveUnused<CR>") -- remove unused variables (not in youtube nvim video)
+	-- end
+end
 
-require('lspconfig')['sumneko_lua'].setup{
-    on_attach = on_attach,
-    capabilties=capabilties,
-    settings = {
-      Lua = {
-        diagnostics = {
-          globals = {'vim'}
-      },
-    },
-  },
-}
+-- used to enable autocompletion
+local capabilities = cmp_nvim_lsp.default_capabilities()
+
+typescript.setup({
+	on_attach = on_attach,
+	capabilties = capabilities,
+})
+
+lspconfig.tailwindcss.setup({
+	on_attach = on_attach,
+	capabilties = capabilities,
+})
+
+lspconfig.sumneko_lua.setup({
+	capabilities = capabilities,
+	on_attach = on_attach,
+	settings = {
+		Lua = {
+			-- recognize "vim" global
+			diagnostics = {
+				globals = { "vim" },
+			},
+			workspace = {
+				-- make language server aware of runtime files
+				library = {
+					[vim.fn.expand("$VIMRUNTIME/lua")] = true,
+					[vim.fn.stdpath("config") .. "/lua"] = true,
+				},
+			},
+		},
+	},
+})
