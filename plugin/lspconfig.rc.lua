@@ -45,7 +45,17 @@ lspconfig.tailwindcss.setup({
 	capabilties = capabilities,
 })
 
-lspconfig.sumneko_lua.setup({
+lspconfig.yamlls.setup({
+	on_attach = on_attach,
+	capabilties = capabilities,
+})
+
+lspconfig.angularls.setup({
+	on_attach = on_attach,
+	capabilties = capabilities,
+})
+
+lspconfig.lua_ls.setup({
 	capabilities = capabilities,
 	on_attach = on_attach,
 	settings = {

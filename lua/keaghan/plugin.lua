@@ -74,5 +74,5 @@ return packer.startup(function(use)
 
 	-- git
 	use("lewis6991/gitsigns.nvim") -- git markers
-	use("dinhhuy258/git.nvim") -- lua port of vim fugitive
+	use("tpope/vim-fugitive") -- we all love tpope
 end)

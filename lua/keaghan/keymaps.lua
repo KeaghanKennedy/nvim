@@ -19,11 +19,15 @@ keymap.set("n", "<leader>tx", ":tabclose<CR>") -- close current tab
 keymap.set("n", "<leader>tl", ":tabn<CR>") --  go to next tab
 keymap.set("n", "<leader>th", ":tabp<CR>") --  go to previous tab
 
+-- Navigate buffers
+keymap.set("n", "<S-l>", ":bnext<CR>")
+keymap.set("n", "<S-h>", ":bprevious<CR>")
+
 -- resize with arrows
 keymap.set("n", "<C-Up>", ":resize +2<CR>")
 keymap.set("n", "<C-Down>", ":resize -2<CR>")
-keymap.set("n", "<C-Left>", ":vertical resize +2<CR>")
-keymap.set("n", "<C-Right>", ":vertical resize -2<CR>")
+keymap.set("n", "<C-Left>", ":vertical resize -2<CR>")
+keymap.set("n", "<C-Right>", ":vertical resize +2<CR>")
 
 ------------
 -- Visual --
